@@ -11,9 +11,7 @@ connectDB();
 
 const app = express();
 app.use(express.static(path.join(__dirname, "dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -40,6 +38,10 @@ app.use("/api/posts", require("./routes/post"));
 
 app.use((req, res, next) => {
   res.status(404).json({ error: "Route not found" });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // Server setup
