@@ -10,8 +10,8 @@ npm-debug.log*
 .env
 
 # Build output
-dist/
-build/
+
+
 
 # Temporary files
 *.tmp
