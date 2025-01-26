@@ -10,38 +10,43 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(express.static(path.join(__dirname, "dist")));
-
 
 // Middleware
 app.use(bodyParser.json());
+
+// CORS configuration
 const allowedOrigins = [
   'https://blog-client-9gw84kx6i-preshi-zankats-projects.vercel.app'
 ];
+
 app.use(cors({
-   origin: (origin, callback) => {
+  origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the HTTP methods you need
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
+
 app.use(morgan("dev"));
 
-
-// Routes
+// API Routes
 app.use("/api/posts", require("./routes/post"));
 
+// Serve static files from React build folder
+app.use(express.static(path.join(__dirname, "dist")));
 
-app.use((req, res, next) => {
-  res.status(404).json({ error: "Route not found" });
-});
-
+// Serve index.html for all other routes (Important for client-side routing)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+// Error handling for unrecognized routes
+app.use((req, res, next) => {
+  res.status(404).json({ error: "Route not found" });
 });
 
 // Server setup
