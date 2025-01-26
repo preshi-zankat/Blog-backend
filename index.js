@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 // CORS configuration
 const allowedOrigins = [
-  'https://blog-client-9gw84kx6i-preshi-zankats-projects.vercel.app'
+  'https://blog-client-ehxvaz8ek-preshi-zankats-projects.vercel.app'
 ];
 
 app.use(cors({
