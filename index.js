@@ -14,25 +14,25 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-// CORS configuration
-// const allowedOrigins = [
-//   'https://blog-client-mjhp0rhcy-preshi-zankats-projects.vercel.app',
-//   'https://blog-client-one-drab.vercel.app/',
-//   'https://blog-client-git-main-preshi-zankats-projects.vercel.app/',
-// ];
+const allowedOrigins = [
+  "https://blog-client-mjhp0rhcy-preshi-zankats-projects.vercel.app",
+  "https://blog-client-one-drab.vercel.app",
+  "https://blog-client-git-main-preshi-zankats-projects.vercel.app",
+];
 
- app.use(cors(*)) 
-//{
-//   origin: (origin, callback) => {
-//     if (allowedOrigins.includes(origin) || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   credentials: true,
-// }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use(morgan("dev"));
 
