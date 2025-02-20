@@ -16,9 +16,7 @@ app.use(bodyParser.json());
 
 // CORS configuration
 const allowedOrigins = [
-  'https://vercel.com/preshi-zankats-projects/blog-client/5dNLLmYPxD6jhr1CVTyfj6Xe5sLc',
-   "https://blog-client-one-drab.vercel.app/",
-  'https://api.unsplash.com/search/photos?query=${query}&client_id=qHoSgW1oMKc5Pz_YbpEtmOxwfz1BaYH4tx-vAV3eSI8'
+  'https://blog-client-mjhp0rhcy-preshi-zankats-projects.vercel.app'
 ];
 
 app.use(cors({
